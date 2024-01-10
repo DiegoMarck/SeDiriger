@@ -21,6 +21,30 @@
   </head>
   <body>
     {% block body %}
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ path('app_home') }}">Accueil / Connexion</a></li>
+                <li><a href="{{ path('app_camera_connection') }}">Connexion Caméra</a></li>
+                <li><a href="{{ path('app_choose_route') }}">Choisir mon parcours</a>
+                    <ul>
+                        <li><a href="{{ path('app_define_route') }}">Définir mon parcours</a></li>
+                        <li><a href="{{ path('app_route_history') }}">Historique de mes parcours</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ path('app_music') }}">Musique d’accompagnement</a></li>
+                <li><a href="{{ path('app_blog') }}">Blog</a></li>
+                <li><a href="{{ path('app_user_reviews') }}">Avis Utilisateur</a></li>
+                <li><a href="{{ path('app_contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Le reste de votre contenu -->
+
+    <footer>
+        <p>&copy; 2023 Sediriger - Assistance pour les malvoyants. Tous droits réservés.</p>
+    </footer>F
     {% endblock %}
   </body>
 </html>

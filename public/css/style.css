@@ -39,7 +39,7 @@ section {
 }
 
 h2 {
-    color: #55D8D9;
+    color: #3E65FF;
 }
 
 ul {
@@ -54,6 +54,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    /* margin-bottom: -150px; */
 }
 
 /* Styles pour les liens */
@@ -71,4 +72,27 @@ a:hover {
     main {
         padding: 10px;
     }
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #55D8D9;
+    list-style: none;
+    padding: 10px 0;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
