@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New GuideVocal{% endblock %}
+
+{% block body %}
+    <h1>Create new GuideVocal</h1>
+
+    {{ include('guide_vocal/_form.html.twig') }}
+
+    <a href="{{ path('app_guide_vocal_index') }}">back to list</a>
+{% endblock %}

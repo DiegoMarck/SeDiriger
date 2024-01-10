@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <h1>Avis</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ avi.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ avi.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ avi.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ avi.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ avi.text }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ avi.user }}</td>
+            </tr>
+            <tr>
+                <th>Date_de_creation</th>
+                <td>{{ avi.dateDeCreation ? avi.dateDeCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_avis_index') }}">back to list</a>
+
+    <a href="{{ path('app_avis_edit', {'id': avi.id}) }}">edit</a>
+
+    {{ include('avis/_delete_form.html.twig') }}
+{% endblock %}

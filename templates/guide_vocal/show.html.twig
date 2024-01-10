@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GuideVocal{% endblock %}
+
+{% block body %}
+    <h1>GuideVocal</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ guide_vocal.id }}</td>
+            </tr>
+            <tr>
+                <th>Voix</th>
+                <td>{{ guide_vocal.voix }}</td>
+            </tr>
+            <tr>
+                <th>Niveau_accompagnement</th>
+                <td>{{ guide_vocal.niveauAccompagnement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_guide_vocal_index') }}">back to list</a>
+
+    <a href="{{ path('app_guide_vocal_edit', {'id': guide_vocal.id}) }}">edit</a>
+
+    {{ include('guide_vocal/_delete_form.html.twig') }}
+{% endblock %}

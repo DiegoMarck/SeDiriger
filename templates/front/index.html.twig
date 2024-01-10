@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Hello
+{% endblock %}
+
+{% block body %}
+  <style>
+    .example-wrapper {
+      margin: 1em auto;
+      max-width: 800px;
+      width: 95%;
+      font: 18px/1.5 sans-serif;
+    }
+    .example-wrapper code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+    }
+  </style>
+
+  <header>
+    <h1>Sediriger - Assistance pour les malvoyants</h1>
+    <!-- Barre de navigation ou d'autres éléments du header si nécessaire -->
+  </header>
+
+  <main>
+    <section id="introduction">
+      <h2>Bienvenue sur Sediriger</h2>
+      <p>Sediriger est une application innovante conçue pour aider les malvoyants à naviguer plus facilement dans leur environnement. Grâce à une intelligence artificielle connectée à une caméra, l'application décrit les différents obstacles en temps réel dans un casque audio, offrant ainsi une navigation plus libre et sécurisée.</p>
+    </section>
+
+    <section id="how-it-works">
+      <h2>Comment ça marche</h2>
+      <p>L'application utilise une caméra pour capturer des images de l'environnement. Ces images sont ensuite traitées par une intelligence artificielle qui identifie les obstacles tels que les personnes, les objets, les changements de niveau, etc. Les informations sont transmises à l'utilisateur via un casque audio qui décrit l'environnement en temps réel.</p>
+      <!-- Ajoutez des images, des diagrammes ou d'autres éléments pour illustrer le fonctionnement de l'application -->
+    </section>
+
+    <section id="features">
+      <h2>Fonctionnalités principales</h2>
+      <ul>
+        <li>Navigation assistée par IA</li>
+        <li>Détection en temps réel des obstacles</li>
+        <li>Compatibilité avec différents environnements</li>
+        <!-- Ajoutez d'autres fonctionnalités selon les spécifications de votre application -->
+      </ul>
+    </section>
+
+    <section id="get-started">
+      <h2>Commencez dès maintenant</h2>
+      <p>Téléchargez Sediriger sur votre smartphone et commencez à bénéficier d'une navigation plus sûre et indépendante. Notre application est disponible sur les plateformes iOS et Android.</p>
+      <!-- Ajoutez des boutons de téléchargement ou des liens vers les app stores -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Sediriger - Assistance pour les malvoyants. Tous droits réservés.</p>
+  </footer>
+{% endblock %}

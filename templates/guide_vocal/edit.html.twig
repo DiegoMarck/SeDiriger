@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit GuideVocal{% endblock %}
+
+{% block body %}
+    <h1>Edit GuideVocal</h1>
+
+    {{ include('guide_vocal/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_guide_vocal_index') }}">back to list</a>
+
+    {{ include('guide_vocal/_delete_form.html.twig') }}
+{% endblock %}

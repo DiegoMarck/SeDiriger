@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GuideVocal index{% endblock %}
+
+{% block body %}
+    <h1>GuideVocal index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Voix</th>
+                <th>Niveau_accompagnement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for guide_vocal in guide_vocals %}
+            <tr>
+                <td>{{ guide_vocal.id }}</td>
+                <td>{{ guide_vocal.voix }}</td>
+                <td>{{ guide_vocal.niveauAccompagnement }}</td>
+                <td>
+                    <a href="{{ path('app_guide_vocal_show', {'id': guide_vocal.id}) }}">show</a>
+                    <a href="{{ path('app_guide_vocal_edit', {'id': guide_vocal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_guide_vocal_new') }}">Create new</a>
+{% endblock %}
