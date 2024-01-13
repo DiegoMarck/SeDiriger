@@ -1,0 +1,45 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Capture Media</h1>
+    <button id="startCapture">Start Capture</button>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <button id="capture">Capture Image</button>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        const startButton = document.getElementById('startCapture');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+
+        startButton.addEventListener('click', () => {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(error => console.error('Error accessing camera:', error));
+        });
+
+        captureButton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/png');
+
+            // Envoyer l'image capturée au serveur Symfony (vous devrez implémenter cette partie)
+            // Utilisez AJAX ou une autre méthode pour envoyer les données au serveur.
+
+            console.log('Image Captured:', imageData);
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/capture.css') }}">
+{% endblock %}
+

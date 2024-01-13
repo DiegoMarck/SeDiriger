@@ -1,0 +1,32 @@
+/* public/css/capture.css (créez ce fichier si nécessaire) */
+
+body {
+    background-color: #BFFA52;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #3E65FF;
+}
+
+button {
+    background-color: #55D8D9;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #69F0C3;
+}
+
+video {
+    margin-top: 20px;
+}
+
+canvas {
+    display: none; /* masquer le canvas par défaut */
+}
