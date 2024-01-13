@@ -47,7 +47,7 @@ class CameraController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_camera_show", methods={"GET"})
+     * @Route("/camera/{id}", name="app_camera_show", methods={"GET"})
      */
     public function show(Camera $camera): Response
     {
@@ -81,10 +81,18 @@ class CameraController extends AbstractController
      */
     public function delete(Request $request, Camera $camera, CameraRepository $cameraRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$camera->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $camera->getId(), $request->request->get('_token'))) {
             $cameraRepository->remove($camera, true);
         }
 
         return $this->redirectToRoute('app_camera_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/camera/capture", name="app_camera_capture", methods={"GET", "POST"})
+     */
+    public function capture(): Response
+    {
+        return $this->render('camera/capture.html.twig');
     }
 }

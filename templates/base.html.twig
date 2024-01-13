@@ -13,6 +13,8 @@
     <!-- Ajoutez ceci dans la section head de votre layout.html.twig -->
     {# <link rel="stylesheet" href="{{ asset('path/to/your/css/style.css') }}" /> #}
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+    <!-- style de capture -->
+    {# <link rel="stylesheet" href="{{ asset('css/capture.css') }}"> #}
     {% endblock %}
 
     {% block javascripts %}
@@ -20,31 +22,36 @@
     {% endblock %}
   </head>
   <body>
-    {% block body %}
+    
     <header>
         <nav class="navbar">
             <ul>
-                <li><a href="{{ path('app_home') }}">Accueil / Connexion</a></li>
-                <li><a href="{{ path('app_camera_connection') }}">Connexion Caméra</a></li>
-                <li><a href="{{ path('app_choose_route') }}">Choisir mon parcours</a>
+                <li><a href="{{ path("app_front" ) }}">Accueil</a></li>
+                <li><a href="{{ path("app_camera_index" ) }}">Caméra</a></li>
+                <li><a >Parcours</a>
                     <ul>
-                        <li><a href="{{ path('app_define_route') }}">Définir mon parcours</a></li>
-                        <li><a href="{{ path('app_route_history') }}">Historique de mes parcours</a></li>
+                        <li><a >Définir mon parcours</a></li>
+                        <li><a >Historique de mes parcours</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ path('app_music') }}">Musique d’accompagnement</a></li>
-                <li><a href="{{ path('app_blog') }}">Blog</a></li>
-                <li><a href="{{ path('app_user_reviews') }}">Avis Utilisateur</a></li>
-                <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                <li><a >Musique</a></li>
+                <li><a >Blog</a></li>
+                <li><a >Avis Utilisateurs</a></li>
+                <li><a >Contact</a></li>
             </ul>
         </nav>
     </header>
+    
+    <main>
+    {% block body %}
+    {% endblock %}
+    </main>
 
     <!-- Le reste de votre contenu -->
 
     <footer>
-        <p>&copy; 2023 Sediriger - Assistance pour les malvoyants. Tous droits réservés.</p>
-    </footer>F
-    {% endblock %}
+        <p>&copy; 2023 Sediriger - Assistance pour les malvoyants. Tous droits réservés. Fondé par Diego Robert de Massy.</p>
+    </footer>
+    
   </body>
 </html>
