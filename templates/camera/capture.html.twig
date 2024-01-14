@@ -44,3 +44,47 @@
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset('css/capture.css') }}" />
 {% endblock %}
+
+{# {% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Capture Media</h1>
+  <div class="capture">
+    <button id="startCapture">Start Capture</button>
+    <video id="video" width="640" height="480" autoplay></video>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const eventSource = new EventSource('{{ path("app_camera_stream") }}');
+
+    document.getElementById('startCapture').addEventListener('click', () => {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((error) => console.error('Error accessing camera:', error));
+    });
+
+    eventSource.onmessage = function (event) {
+      // Mettez en œuvre la logique pour afficher la nouvelle image sur la vidéo
+      console.log('Nouvelle image reçue:', event.data);
+
+      // Mettez à jour la source de la vidéo avec la nouvelle image (remplacez cela par votre logique réelle)
+      // Notez que ceci est une simulation et doit être remplacé par une logique appropriée.
+      const imageData = JSON.parse(event.data);
+      video.src = `data:image/png;base64, ${imageData.base64Image}`;
+    };
+
+    eventSource.onerror = function (error) {
+      console.error('Erreur de SSE:', error);
+      eventSource.close();
+    };
+  </script>
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/capture.css') }}" />
+{% endblock %} #}

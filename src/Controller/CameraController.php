@@ -47,7 +47,7 @@ class CameraController extends AbstractController
     }
 
     /**
-     * @Route("/camera/{id}", name="app_camera_show", methods={"GET"})
+     * @Route("/{id}", name="app_camera_show", methods={"GET"})
      */
     public function show(Camera $camera): Response
     {
@@ -88,11 +88,5 @@ class CameraController extends AbstractController
         return $this->redirectToRoute('app_camera_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * @Route("/camera/capture", name="app_camera_capture", methods={"GET", "POST"})
-     */
-    public function capture(): Response
-    {
-        return $this->render('camera/capture.html.twig');
-    }
 }
+
