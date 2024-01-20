@@ -17,6 +17,6 @@ class CaptureController extends AbstractController
         // return $this->render('capture/index.html.twig', [
         //     'controller_name' => 'CaptureController',
         // ]);
-        return $this->render('camera/capture.html.twig');
+        return $this->render('capture/capture.html.twig');
     }
 }
