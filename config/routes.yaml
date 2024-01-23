@@ -4,10 +4,15 @@
 
 # config/routes.yaml
 app_camera_capture:
-    path: '/camera/capture'
+    path: '/capture'
     controller: 'App\Controller\CaptureController::capture'
     methods: ['GET', 'POST']
 
+app_camera_index:
+    path: '/camera'
+    controller: 'App\Controller\CameraController::index'
+    methods: ['GET']
+    
 # app_camera_index:
 #     path: '/camera/'
 #     controller: 'App\Controller\CameraController::index'
