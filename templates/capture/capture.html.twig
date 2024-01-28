@@ -29,9 +29,12 @@
         .getUserMedia({ video: true })
         .then(function (stream) {
           // On affecte le flux vidéo à l'élément video
-          video.srcObject = stream
+          // video.srcObject = stream
           // On démarre la lecture de la vidéo
-          video.play()
+          // video.play()
+          video.onloadedmetadata = function () {
+            video.play()
+          }
         })
         .catch(function (err) {
           // On gère les erreurs
@@ -55,7 +58,7 @@
       // On lui attribue l'URL de données comme source
       img.src = dataURL
       // On ajoute l'élément img à la div capture
-      video.appendChild(img)
+      capture.appendChild(img)
     })
     
     // On ajoute un écouteur d'événement sur le bouton stopCapture
