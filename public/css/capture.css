@@ -27,9 +27,6 @@ video {
     margin-top: 20px;
 }
 
-canvas {
-    display: none; /* masquer le canvas par défaut */
-}
 .capture {
     display: flex;
     /* flex-direction: column; */

@@ -5,8 +5,7 @@
   <div class="capture">
     <button id="startCapture">Start Capture</button>
     <video id="video" width="640" height="480" autoplay></video>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    <button id="capture">Capture Image</button>
+    <button id="capture">Stop Capture</button>
   </div>
   {% if app.user %}
       {# <a href="{{ path('app_camera_new') }}">Create new</a> #}
@@ -15,79 +14,64 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script>
-    const startButton = document.getElementById('startCapture')
-    const video = document.getElementById('video')
-    const canvas = document.getElementById('canvas')
-    const captureButton = document.getElementById('capture')
-    
-    startButton.addEventListener('click', () => {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          video.srcObject = stream
-        })
-        .catch((error) => console.error('Error accessing camera:', error))
-    })
-    
-    captureButton.addEventListener('click', () => {
-      const context = canvas.getContext('2d')
-      context.drawImage(video, 0, 0, canvas.width, canvas.height)
-      const imageData = canvas.toDataURL('image/png')
-    
-      // Envoyer l'image capturée au serveur Symfony (vous devrez implémenter cette partie)
-      // Utilisez AJAX ou une autre méthode pour envoyer les données au serveur.
-    
-      console.log('Image Captured:', imageData)
-    })
-  </script>
-{% endblock %}
-
-{% block stylesheets %}
-  {{ parent() }}
-  <link rel="stylesheet" href="{{ asset('css/capture.css') }}" />
-{% endblock %}
-
-{# {% extends 'base.html.twig' %}
-
-{% block body %}
-  <h1>Capture Media</h1>
-  <div class="capture">
-    <button id="startCapture">Start Capture</button>
-    <video id="video" width="640" height="480" autoplay></video>
-  </div>
-
-  <script>
+  {# <script>
+    const startButton = document.getElementById('startCapture');
     const video = document.getElementById('video');
-    const eventSource = new EventSource('{{ path("app_camera_stream") }}');
+    const captureButton = document.getElementById('capture');
 
-    document.getElementById('startCapture').addEventListener('click', () => {
+    let stream; // Variable pour stocker le flux vidéo
+
+    startButton.addEventListener('click', () => {
+      // Accéder à la caméra de l'appareil
       navigator.mediaDevices
         .getUserMedia({ video: true })
-        .then((stream) => {
-          video.srcObject = stream;
+        .then((videoStream) => {
+          stream = videoStream;
+          video.srcObject = videoStream; // Afficher le flux vidéo dans l'élément vidéo
         })
         .catch((error) => console.error('Error accessing camera:', error));
     });
 
-    eventSource.onmessage = function (event) {
-      // Mettez en œuvre la logique pour afficher la nouvelle image sur la vidéo
-      console.log('Nouvelle image reçue:', event.data);
+    captureButton.addEventListener('click', () => {
+      // Arrêter le flux vidéo
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => track.stop());
+        video.srcObject = null; // Arrêter l'affichage du flux vidéo
+      }
+    });
+  </script> #}
+  <script>
+    const startButton = document.getElementById('startCapture');
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('capture');
 
-      // Mettez à jour la source de la vidéo avec la nouvelle image (remplacez cela par votre logique réelle)
-      // Notez que ceci est une simulation et doit être remplacé par une logique appropriée.
-      const imageData = JSON.parse(event.data);
-      video.src = `data:image/png;base64, ${imageData.base64Image}`;
-    };
+    let stream; // Variable pour stocker le flux vidéo
 
-    eventSource.onerror = function (error) {
-      console.error('Erreur de SSE:', error);
-      eventSource.close();
-    };
+    startButton.addEventListener('click', () => {
+      // Accéder à la caméra de l'appareil
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((videoStream) => {
+          stream = videoStream;
+          video.srcObject = videoStream; // Afficher le flux vidéo dans l'élément vidéo
+        })
+        .catch((error) => console.error('Error accessing camera:', error));
+    });
+
+    captureButton.addEventListener('click', () => {
+      // Arrêter le flux vidéo
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => track.stop());
+        video.srcObject = null; // Arrêter l'affichage du flux vidéo
+      }
+    });
   </script>
 {% endblock %}
 
 {% block stylesheets %}
   {{ parent() }}
   <link rel="stylesheet" href="{{ asset('css/capture.css') }}" />
-{% endblock %} #}
+{% endblock %}
+
