@@ -34,8 +34,9 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_camera_new') }}">Create new</a>
+    {% if app.user %}
+        {# <a href="{{ path('app_camera_new') }}">Create new</a> #}
+    {% endif %}
     <a href="{{ path('app_capture') }}" class="btn-capture">Capture Media</a>
 
 {% endblock %}
