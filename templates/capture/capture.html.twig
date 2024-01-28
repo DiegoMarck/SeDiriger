@@ -2,11 +2,6 @@
 
 {% block body %}
   <h1>Capture Media</h1>
-  {# <div class="capture">
-    <button id="startCapture">Start Capture</button>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="capture">Stop Capture</button>
-  </div> #}
   <div class="capture">
     <button id="startCapture">Start Capture</button>
     <video id="video" width="640" height="480" autoplay></video>
@@ -19,58 +14,7 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {# <script>
-       const startButton = document.getElementById('startCapture')
-       const video = document.getElementById('video')
-       const captureButton = document.getElementById('capture')
-       
-       let stream // Variable pour stocker le flux vidéo
-       
-       startButton.addEventListener('click', () => {
-         // Accéder à la caméra de l'appareil
-         navigator.mediaDevices
-           .getUserMedia({ video: true })
-           .then((videoStream) => {
-             stream = videoStream
-             video.srcObject = videoStream // Afficher le flux vidéo dans l'élément vidéo
-           })
-           .catch((error) => console.error('Error accessing camera:', error))
-       })
-       
-       captureButton.addEventListener('click', () => {
-         // Arrêter le flux vidéo
-         if (stream) {
-           const tracks = stream.getTracks()
-           tracks.forEach((track) => track.stop())
-           video.srcObject = null // Arrêter l'affichage du flux vidéo
-         }
-       })
-     </script> #}
-  {# <script>
-       const startButton = document.getElementById('startCapture')
-       const stopButton = document.getElementById('stopCapture')
-       const video = document.getElementById('video')
-       let stream
-       
-       startButton.addEventListener('click', async () => {
-         try {
-           // Demander l'autorisation d'accéder à la caméra
-           stream = await navigator.mediaDevices.getUserMedia({ video: true })
-           video.srcObject = stream
-         } catch (error) {
-           console.error('Error accessing camera:', error)
-         }
-       })
-       
-       stopButton.addEventListener('click', () => {
-         // Arrêter le flux vidéo
-         if (stream) {
-           const tracks = stream.getTracks()
-           tracks.forEach((track) => track.stop())
-           video.srcObject = null
-         }
-       })
-     </script> #}
+
   <script>
     // On récupère les éléments du DOM
     let video = document.getElementById('video')
@@ -111,7 +55,7 @@
       // On lui attribue l'URL de données comme source
       img.src = dataURL
       // On ajoute l'élément img à la div capture
-      capture.appendChild(img)
+      video.appendChild(img)
     })
     
     // On ajoute un écouteur d'événement sur le bouton stopCapture
