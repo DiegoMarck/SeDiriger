@@ -48,15 +48,14 @@
 
     let stream; // Variable pour stocker le flux vidéo
 
-    startButton.addEventListener('click', () => {
-      // Accéder à la caméra de l'appareil
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((videoStream) => {
-          stream = videoStream;
-          video.srcObject = videoStream; // Afficher le flux vidéo dans l'élément vidéo
-        })
-        .catch((error) => console.error('Error accessing camera:', error));
+    startButton.addEventListener('click', async () => {
+      try {
+        // Demander l'autorisation d'accéder à la caméra
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream; // Afficher le flux vidéo dans l'élément vidéo
+      } catch (error) {
+        console.error('Error accessing camera:', error);
+      }
     });
 
     captureButton.addEventListener('click', () => {
