@@ -41,29 +41,28 @@
       }
     });
   </script> #}
-  <script>
+   <script>
     const startButton = document.getElementById('startCapture');
+    const stopButton = document.getElementById('stopCapture');
     const video = document.getElementById('video');
-    const captureButton = document.getElementById('capture');
-
-    let stream; // Variable pour stocker le flux vidéo
+    let stream;
 
     startButton.addEventListener('click', async () => {
       try {
         // Demander l'autorisation d'accéder à la caméra
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream; // Afficher le flux vidéo dans l'élément vidéo
+        video.srcObject = stream;
       } catch (error) {
         console.error('Error accessing camera:', error);
       }
     });
 
-    captureButton.addEventListener('click', () => {
+    stopButton.addEventListener('click', () => {
       // Arrêter le flux vidéo
       if (stream) {
         const tracks = stream.getTracks();
         tracks.forEach((track) => track.stop());
-        video.srcObject = null; // Arrêter l'affichage du flux vidéo
+        video.srcObject = null;
       }
     });
   </script>
