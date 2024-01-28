@@ -3,9 +3,9 @@
 {% block body %}
   <h1>Capture Media</h1>
   <div class="capture">
-    <button id="startCapture">Start Capture</button>
+    <button id="startButton">Start Capture</button>
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="capture">Stop Capture</button>
+    <button id="stopButton">Stop Capture</button>
   </div>
   {% if app.user %}
       {# <a href="{{ path('app_camera_new') }}">Create new</a> #}
