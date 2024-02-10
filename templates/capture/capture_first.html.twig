@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Capture Media</h1>
+  <div class="capture">
+    <button id="startCapture">Start Capture</button>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="stopCapture">Stop Capture</button>
+  </div>
+  {% if app.user %}
+    {# <a href="{{ path('app_camera_new') }}">Create new</a> #}
+  {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script>
+    // On récupère les éléments du DOM
+    let video = document.getElementById('video')
+    let capture = document.getElementsByClassName('capture')[0]
+    let startCapture = document.getElementById('startCapture')
+    let stopCapture = document.getElementById('stopCapture')
+    
+    // On vérifie si le navigateur supporte l'API mediaDevices
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // On demande l'accès à la caméra
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          // On affecte le flux vidéo à l'élément video
+          video.srcObject = stream
+          // On démarre la lecture de la vidéo
+          video.play()
+          
+        })
+        .catch(function (err) {
+          // On gère les erreurs
+          console.error(err)
+        })
+    }
+    
+    // On ajoute un écouteur d'événement sur le bouton startCapture
+    startCapture.addEventListener('click', function () {
+      // On crée un élément canvas
+      let canvas = document.createElement('canvas')
+      // On définit sa largeur et sa hauteur
+      canvas.width = video.videoWidth
+      canvas.height = video.videoHeight
+      // On dessine l'image capturée par la caméra sur le canvas
+      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height)
+      // On convertit le canvas en une URL de données
+      let dataURL = canvas.toDataURL('image/png')
+      // On crée un élément img
+      let img = document.createElement('img')
+      // On lui attribue l'URL de données comme source
+      img.src = dataURL
+      // On ajoute l'élément img à la div capture
+      capture.appendChild(img)
+    })
+    
+    // On ajoute un écouteur d'événement sur le bouton stopCapture
+    stopCapture.addEventListener('click', function () {
+      // On arrête le flux vidéo
+      video.srcObject.getTracks().forEach((track) => track.stop())
+      // On vide la div capture
+      capture.innerHTML = ''
+    })
+  </script>
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/capture.css') }}" />
+{% endblock %}
