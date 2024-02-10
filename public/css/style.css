@@ -11,7 +11,7 @@ ul {
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #BFFA52;
+    background-color: #BFFA52 !important;
     color: #333;
 }
 
@@ -40,7 +40,7 @@ section {
 }
 
 h2 {
-    color: #3E65FF;
+    color: #3E65FF !important;
 }
 
 ul {
@@ -55,17 +55,17 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    /* margin-bottom: -150px; */
 }
 
 /* Styles pour les liens */
 a {
     color: #0066cc;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 a:hover {
     text-decoration: underline;
+    color: azure !important;
 }
 
 /* Styles responsives */
@@ -107,5 +107,5 @@ a:hover {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 20px; /* ajustez selon vos besoins */
+    margin-top: 20px; 
 }
