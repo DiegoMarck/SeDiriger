@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (streamStarted) {
           video.play();
           play.classList.add('d-none');
-          pause.classList.remove('d-none');
+          pause.classList.remove('d-none');         
           return;
         }
         if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {

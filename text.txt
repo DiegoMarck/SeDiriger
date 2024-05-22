@@ -90,3 +90,182 @@ DirectoryIndex index.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+
+dans AnalyseOpenCVController.php  :
+
+/**
+* @Route("/analyse/open/c/v", name="app_analyse_open_c_v")
+*/
+
+premier script.py : 
+import cv2
+
+# Charger l'image à partir du fichier
+image = cv2.imread('public/img/space_shuttle_liftoff_liftoff.jpg')
+
+# Vérifier si l'image est chargée correctement
+if image is None:
+    print("Impossible de charger l'image.")
+    exit()
+
+# Convertir l'image en niveaux de gris
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Afficher l'image en niveaux de gris
+cv2.imshow('Image en niveaux de gris', gray_image)
+
+# Attendre une touche pour fermer la fenêtre
+cv2.waitKey(0)
+
+# Fermer toutes les fenêtres
+cv2.destroyAllWindows()
+
+
+partie node.js : 
+// Require the child_process module from Node.js
+const { spawn } = require('child_process');
+
+// Function to start the Python script
+const startPythonScript = () => {
+    // Replace 'python' with 'python3' if 'python3' is the command to run Python 3 on your system
+    const pythonProcess = spawn('python', ['/python/script.py']);
+
+    // Listen for stdout data from the Python script
+    pythonProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+    });
+
+    // Listen for stderr data from the Python script
+    pythonProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    // Listen for when the Python script closes
+    pythonProcess.on('close', (code) => {
+        console.log(`Python script exited with code ${code}`);
+    });
+};
+
+// Call the function to start the Python script
+startPythonScript();
+
+
+ancien script.py : 
+import cv2
+import pygame
+
+# Initialiser pygame pour la lecture audio
+pygame.mixer.init()
+pygame.mixer.music.load("public/mp3/detectionVisage.mp3")  # Remplacez "path/to/your/audio/message.mp3" par le chemin de votre fichier audio
+
+# Capture vidéo à partir de la caméra par défaut
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Erreur: Impossible d'ouvrir la caméra.")
+    exit()
+    
+# Chargement du classificateur de cascade pour la détection de visages
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+while True:
+    # Capture d'une frame
+    ret, frame = cap.read()
+    
+    if not ret:
+        print("Erreur: Impossible de lire la frame de la caméra.")
+        break
+
+    # Convertir l'image en niveaux de gris
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    
+    # Détection des visages dans l'image
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    
+    # Si un visage est détecté, jouer le message audio
+    if len(faces) > 0:
+        pygame.mixer.music.play()
+        # Attendre que le message audio se termine
+        while pygame.mixer.music.get_busy():
+            continue
+    
+    # Dessiner un rectangle autour des visages détectés
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+    
+    # Affichage du résultat
+    cv2.imshow('Face Detection', frame)
+    
+    # Attendre l'appui sur la touche 'q' pour quitter
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Libérer la capture et détruire toutes les fenêtres OpenCV
+cap.release()
+cv2.destroyAllWindows()
+
+2
+
+import cv2
+import pygame
+import os
+
+# Initialiser pygame pour la lecture audio
+pygame.mixer.init()
+
+# Chemin absolu du fichier audio
+audio_path = os.path.join(os.getcwd(), "public", "mp3", "detectionVisage.mp3")
+pygame.mixer.music.load(audio_path)
+
+# Capture vidéo à partir de la caméra par défaut
+cap = cv2.VideoCapture(0)
+
+# Vérifier si la caméra est ouverte
+if not cap.isOpened():
+    print("Erreur: Impossible d'ouvrir la caméra.")
+    exit()
+
+# Chargement du classificateur de cascade pour la détection de visages
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+while True:
+    # Capture d'une frame
+    ret, frame = cap.read()
+    
+    # Vérifier si la lecture de la frame a réussi
+    if not ret:
+        print("Erreur: Impossible de lire la frame de la caméra.")
+        break
+
+    # Convertir l'image en niveaux de gris
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    
+    # Détection des visages dans l'image
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    
+    # Si un visage est détecté, jouer le message audio
+    if len(faces) > 0:
+        try:
+            pygame.mixer.music.play()
+            # Attendre que le message audio se termine
+            while pygame.mixer.music.get_busy():
+                continue
+        except pygame.error:
+            print("Erreur: Impossible de lire le fichier audio.")
+
+    # Dessiner un rectangle autour des visages détectés
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+    
+    # Affichage du résultat
+    cv2.imshow('Face Detection', frame)
+    
+    # Attendre l'appui sur la touche 'q' pour quitter
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Libérer la capture et détruire toutes les fenêtres OpenCV
+cap.release()
+cv2.destroyAllWindows()
+
